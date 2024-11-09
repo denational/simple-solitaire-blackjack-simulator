@@ -1,3 +1,8 @@
+//TODO: fix undefined, aces
+
+//cardValues: 2 characters, card Suits: 5 characters
+//Uses substrings to store card values
+
 var cardValues = ["_1", "_2", "_3", "_4", "_5", "_6", "_7", "_8", "_9", 10, 11, 12, 13];
 var cardSuits = ["heart", "diamo", "spade", "clubs"];
 var deck = [];
@@ -27,6 +32,7 @@ var isAce = false;
 var ace1Value = 1;
 var ace11Value = 11;
 
+//Puts cardSuits and cardValues together in all permutations to make a standard 52-card deck
 function makeDeck() {
     for (var i = 0; i < 4; i++) {
         for (var j = 0; j < 13; j++) {
@@ -35,9 +41,11 @@ function makeDeck() {
     }
 }
 
+//TOREMOVE: For debug purposes
 makeDeck();
 console.log(deck);
 
+//Initializing the bet slider
 document.addEventListener("DOMContentLoaded", function () {
     var betSlider = document.getElementById("betSlider");
     var betLabel = document.getElementById("betLabel");
@@ -45,49 +53,49 @@ document.addEventListener("DOMContentLoaded", function () {
     var isBet = false;
     var bet = 0;
 
-    // Add an event listener to the slider
+ 
     betSlider.addEventListener("input", function () {
-        bet = betSlider.value;  // Get the slider's value
-        betLabel.innerText = "Bet amount: $" + bet;  // Update the label
-        betValue.innerText = bet;  // Update the displayed slider value
-        isBet = true;  // Set the flag to true
+        bet = betSlider.value;  
+        betLabel.innerText = "Bet amount: $" + bet;  
+        betValue.innerText = bet;  
+        isBet = true;  
     });
 });
 
 
-// Shuffling the deck
+//Shuffling the deck
 function shuffleDeck() {
     var position = 0;
 
-    // Shuffle the deck
+    
     for (var k = 0; k < deck.length; k++) {
-        position = Math.floor(Math.random() * deck.length); // Simulating randomNumber
+        position = Math.floor(Math.random() * deck.length); 
         var temp = deck[position];
         deck[position] = deck[deck.length - 1 - k];
         deck[deck.length - 1 - k] = temp;
     }
 
-    // Remove undefined values from the deck
+    //Remove undefined values from the deck
     for (var i = 0; i < deck.length; i++) {
         if (deck[i] == undefined) {
-            deck.splice(i, 1); // Simulating removeItem
-            i--; // Adjust index after removal
+            deck.splice(i, 1); 
+            i--; 
         }
     }
 
-    // Select the top 5 cards for topCards
+    //Top 5 cards from the deck shown on screen
     topCards = [];
     for (var i = 0; i < 5; i++) {
-        topCards.push(deck[i]); // Simulating appendItem
+        topCards.push(deck[i]); 
     }
 
-    // Reset values
+    
     totalValue = 0;
     ace1Value = 1;
     ace11Value = 11;
     document.getElementById("totalValueOutput").innerText = "Total Value: " + totalValue; // Simulating setText
 
-    // Log topCards for debugging purposes
+    //TOREMOVE: For debug purposes
     console.log("Top 5 cards: ", topCards);
 
     return topCards;
@@ -95,7 +103,7 @@ function shuffleDeck() {
 
 shuffleDeck();
 
-
+//Updates betSlider bounds
 function updateMoney() {
     moneyLabel.innerText = "Money: $" + money;
     betSlider.setAttribute("max", money);
@@ -109,6 +117,7 @@ function updateMoney() {
 var nextCard = 0;
 var lossMargin = 0;
 
+//Updates game state post-loss or post-win
 function updateLoss(isSurrender) {
     lossMargin = totalValue - cardValue;
     if (isSurrender === true) {
@@ -137,6 +146,7 @@ function updateWin() {
     resetGame(true);
 }
 
+//Sets card image upon click + checks for victory/loss once card is drawn
 function setCardImage(cardNumber) {
     console.log("setCardImage called with cardNumber:", cardNumber);
     console.log("topCards array:", topCards);
@@ -153,7 +163,7 @@ function setCardImage(cardNumber) {
     if (number[0] == "_") {
         number = number[1];
     }
-    var cardValue = Number(number); // Using Number constructor
+    var cardValue = Number(number); 
     number = Number(number) - 1;
     if (number == 1) {
         isAce = true;
@@ -178,7 +188,7 @@ function setCardImage(cardNumber) {
     document.getElementById("totalValueOutput").innerText = "Total Value: " + totalValue;
 
     if (totalValue > 21) {
-        updateLoss();
+        updateLoss(false);
     }
     if (totalValue == 21) {
         updateWin();
@@ -196,42 +206,29 @@ function setCardImage(cardNumber) {
     nextCard = cardNumber + 1;
 }
 
-var totalValue = 0;
-var money = 100;
-var bet = 0;
-var highMoney = 100;
-var wins = 0;
-var losses = 0;
-var ace1Value = 1;
-var ace11Value = 11;
-
+//Resets game based on win/loss
 function resetGame(isWin) {
-    if (isWin) {
-        wins++;
-    } else {
-        losses++;
-    }
 
-    // Update the win/loss display
+    nextCard = 0;
+    cardNumber = 0;
     document.getElementById("winTracker").innerText = "Wins/Losses: " + wins + "-" + losses;
 
-    // Reset total values
+    
     totalValue = 0;
     ace1Value = 1;
     ace11Value = 11;
     document.getElementById("totalValueOutput").innerText = "Total Value: " + totalValue;
 
-    // Reset money and bet
-    money = isWin ? money : money; // Adjust as necessary
+    
     bet = 0;
     document.getElementById("betSlider").value = 0;
     document.getElementById("betLabel").innerText = "Bet amount: $0";
     document.getElementById("moneyLabel").innerText = "Money: $" + money;
 
-    // Shuffle the deck and reset topCards
+    
     shuffleDeck();
 
-    // Reset card images
+    
     for (var i = 0; i < 5; i++) {
         document.getElementById("card" + i).src = "https://dejpknyizje2n.cloudfront.net/media/carstickers/versions/playing-cards-back-design-in-red-sticker-u7d5f-x450.png";
     }
@@ -239,8 +236,8 @@ function resetGame(isWin) {
     console.log("Game has been reset. Is Win: " + isWin);
 }
 
+//Initializes all web elements
 document.addEventListener("DOMContentLoaded", function () {
-    // Initial setup for variables and event listeners
     let betSlider = document.getElementById("betSlider");
     let betLabel = document.getElementById("betLabel");
     let betValue = document.getElementById("betValue");
@@ -263,41 +260,33 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function setScreen(screenId) {
-        // Implement logic to change screens
-        console.log("Switching to screen: " + screenId); // Placeholder
+       
+        console.log("Switching to screen: " + screenId); 
     }
 
-    document.getElementById("freeplayButton").addEventListener("click", function () {
-        setScreen("game");
-        shuffleDeck();
-        updateMoney();
-        for (let i = 0; i < 5; i++) {
-            document.getElementById("card" + i).src = "https://dejpknyizje2n.cloudfront.net/media/carstickers/versions/playing-cards-back-design-in-red-sticker-u7d5f-x450.png";
-        }
-    });
-
+    //Logic to update the picture of each card
     document.getElementById("card0").addEventListener("click", function () {
         if (isBet) {
             setCardImage(0);
-        } 
+        }
     });
 
     document.getElementById("card1").addEventListener("click", function () {
         if (isBet && nextCard == 1) {
             setCardImage(1);
-        } 
+        }
     });
 
     document.getElementById("card2").addEventListener("click", function () {
         if (isBet && nextCard == 2) {
             setCardImage(2);
-        } 
+        }
     });
 
     document.getElementById("card3").addEventListener("click", function () {
         if (isBet && nextCard == 3) {
             setCardImage(3);
-        } 
+        }
     });
 
     document.getElementById("card4").addEventListener("click", function () {
@@ -306,84 +295,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    document.getElementById("hitButton").addEventListener("click", function () {
-        if (isBet) {
-            setCardImage(nextCard);
-        } 
-    });
-
-    document.getElementById("retryButton").addEventListener("click", function () {
-        setScreen("game");
-        shuffleDeck();
-        for (let i = 0; i < 5; i++) {
-            document.getElementById("card" + i).src = "https://dejpknyizje2n.cloudfront.net/media/carstickers/versions/playing-cards-back-design-in-red-sticker-u7d5f-x450.png";
-        }
-        nextCard = 0;
-        isBet = false;
-        updateMoney();
-    });
-
-    document.getElementById("retry2Button").addEventListener("click", function () {
-        setScreen("game");
-        shuffleDeck();
-        for (let i = 0; i < 5; i++) {
-            document.getElementById("card" + i).src = "https://dejpknyizje2n.cloudfront.net/media/carstickers/versions/playing-cards-back-design-in-red-sticker-u7d5f-x450.png";
-        }
-        nextCard = 0;
-        isBet = false;
-        updateMoney();
-    });
 
     document.getElementById("surrenderButton").addEventListener("click", function () {
         money = (21 - totalValue);
         betSlider.setAttribute("max", money);
-        setScreen("lose");
+        updateLoss(true);
     });
 
-    document.getElementById("rulesButton").addEventListener("click", function () {
-        setScreen("rules");
-    });
 
-    document.getElementById("homeRules").addEventListener("click", function () {
-        setScreen("home");
-    });
+    //TODO: Fix ace bugs 
 
-    document.getElementById("homeButton").addEventListener("click", function () {
-        setScreen("home");
-    });
-
-    document.getElementById("checkbox1").addEventListener("change", function () {
-        aceValue = 1;
-        totalValue -= 10;
-        document.getElementById("checkbox11").checked = false;
-        document.getElementById("label_1").style.backgroundColor = "rgb(178, 45, 45)";
-        document.getElementById("label_11").style.backgroundColor = "rgb(112, 112, 112)";
-        totalValue = ace1Value;
-        if (totalValue === 21) {
-            money *= (10 - nextCard);
-            updateMoney();
-            setScreen("win");
-            wins++;
-            winTracker.innerText = "Wins/Losses: " + wins + "-" + losses;
-        }
-        document.getElementById("totalValueOutput").innerText = "Total Value: " + totalValue;
-    });
-
-    document.getElementById("checkbox11").addEventListener("change", function () {
-        aceValue = 11;
-        document.getElementById("checkbox1").checked = false;
-        document.getElementById("label_11").style.backgroundColor = "rgb(178, 45, 45)";
-        document.getElementById("label_1").style.backgroundColor = "rgb(112, 112, 112)";
-        isAce = true;
-        totalValue = ace11Value;
-        if (totalValue === 21) {
-            money *= (10 - nextCard);
-            updateMoney();
-            setScreen("win");
-            wins++;
-            winTracker.innerText = "Wins/Losses: " + wins + "-" + losses;
-        }
-        document.getElementById("totalValueOutput").innerText = "Total Value: " + totalValue;
-    });
 });
-

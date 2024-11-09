@@ -2,57 +2,64 @@
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 20px;
-    background-color: #f0f0f0; /* Light grey background */
+    background-color: #181818;
+    color: #f0f0f0;
 }
 
 .container {
     margin: 20px;
     padding: 10px;
-    background-color: #ffffff; /* White background for containers */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light shadow for a 3D effect */
-    border-radius: 5px; /* Rounded corners */
+    background-color: #282828;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
 }
 
 .card-img {
     height: 150px;
     width: auto;
     margin: 5px;
-    transition: transform 0.3s ease; /* Smooth transform transition */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
     .card-img:hover {
-        transform: scale(1.1); /* Slightly enlarge on hover */
+        transform: scale(1.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     }
 
 button {
-    background-color: #007bff; /* Blue background */
+    background-color: #007bff;
     color: white;
     border: none;
     padding: 10px 20px;
     margin: 5px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth background color transition */
+    transition: background-color 0.3s ease;
 }
 
     button:hover {
-        background-color: #0056b3; /* Darker blue on hover */
+        background-color: #0056b3;
     }
 
 input[type="range"] {
     width: 80%;
     margin: 10px 0;
+    background-color: #383838;
+    color: #f0f0f0;
 }
 
 label, p {
     margin: 10px 0;
     font-size: 18px;
+    color: #f0f0f0;
 }
 
 #totalValueOutput, #moneyLabel, #winTracker, #highScoreOutput {
     font-size: 20px;
     font-weight: bold;
     margin: 10px 0;
+    color: #f0f0f0;
 }
 
 .checkbox-container {
@@ -63,18 +70,19 @@ label, p {
 
     .checkbox-container label {
         margin: 0 10px;
-        background-color: #e9ecef; /* Light grey background for checkboxes */
+        background-color: #383838;
         padding: 10px;
         border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.3s ease;
+        color: #f0f0f0;
     }
 
     .checkbox-container input[type="checkbox"] {
-        display: none; /* Hide the default checkbox */
+        display: none;
     }
 
         .checkbox-container input[type="checkbox"]:checked + label {
-            background-color: #007bff; /* Blue background for checked state */
+            background-color: #007bff;
             color: white;
         }
