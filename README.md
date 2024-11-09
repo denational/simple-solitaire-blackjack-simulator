@@ -1,2 +1,3 @@
 # simple-solitaire-blackjack-simulator
-Simple Solitaire Blackjack Simulator
+A simple blackjack simulator, written primarily using JavaScript.
+
