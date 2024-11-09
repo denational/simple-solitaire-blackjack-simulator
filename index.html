@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .container {
+            margin: 10px;
+        }
+
+        .card-img {
+            height: 150px;
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Card Game</h1>
+
+    <div class="container">
+        <input type="range" id="betSlider" min="0" max="100" step="1">
+        <label id="betLabel">Bet amount: $0</label>
+        <p>Current bet: <span id="betValue">0</span></p>
+    </div>
+
+    <div class="container">
+        <div id="totalValueOutput">Total Value: 0</div>
+        <div id="moneyLabel">Money: $100</div>
+        <div id="winTracker">Wins/Losses: 0-0</div>
+        <div id="highScoreOutput">Highest amount: $100</div>
+    </div>
+
+    <div class="container">
+        <img id="card0" class="card-img" src="https://dejpknyizje2n.cloudfront.net/media/carstickers/versions/playing-cards-back-design-in-red-sticker-u7d5f-x450.png" alt="Card 0">
+        <img id="card1" class="card-img" src="https://dejpknyizje2n.cloudfront.net/media/carstickers/versions/playing-cards-back-design-in-red-sticker-u7d5f-x450.png" alt="Card 1">
+        <img id="card2" class="card-img" src="https://dejpknyizje2n.cloudfront.net/media/carstickers/versions/playing-cards-back-design-in-red-sticker-u7d5f-x450.png" alt="Card 2">
+        <img id="card3" class="card-img" src="https://dejpknyizje2n.cloudfront.net/media/carstickers/versions/playing-cards-back-design-in-red-sticker-u7d5f-x450.png" alt="Card 3">
+        <img id="card4" class="card-img" src="https://dejpknyizje2n.cloudfront.net/media/carstickers/versions/playing-cards-back-design-in-red-sticker-u7d5f-x450.png" alt="Card 4">
+    </div>
+
+    <div class="container">
+        <button id="freeplayButton">Free Play</button>
+        <button id="hitButton">Hit</button>
+        <button id="retryButton">Retry</button>
+        <button id="retry2Button">Retry2</button>
+        <button id="surrenderButton">Surrender</button>
+        <button id="rulesButton">Rules</button>
+        <button id="homeRules">Home Rules</button>
+        <button id="homeButton">Home</button>
+    </div>
+
+    <div class="container">
+        <label id="label_1"><input type="checkbox" id="checkbox1"> Ace as 1</label>
+        <label id="label_11"><input type="checkbox" id="checkbox11"> Ace as 11</label>
+    </div>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="rules.js"></script>
+</body>
+</html>
